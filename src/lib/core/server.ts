@@ -4,6 +4,7 @@ import * as Cors from "cors";
 import * as BodyParser from "body-parser";
 import * as ExpressXRequestId from "express-x-request-id";
 import * as Logger from "logger";
+import * as ExpressErrorHandler from "express-error-handler";
 import MiddlewareService from "../../layer/service/middleware-service";
 import RouteV1 from "../../layer/service/v1";
 
@@ -27,13 +28,7 @@ class Server {
     this.app.use("/api/v1", RouteV1);
     this.app.use(MiddlewareService.responseValidatorMw);
     this.app.use(MiddlewareService.sendResponseMw);
-
-    this.app.use((err, req, res, next) => {
-      res.locals.message = err.message;
-      res.locals.error = req.app.get("env") === "development" ? err : {};
-      res.status(err.status || 500);
-      res.json(res.locals.error);
-    });
+    this.app.use(ExpressErrorHandler.middleware);
   }
 
 }

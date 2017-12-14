@@ -18,11 +18,11 @@
         "sinon"
       ],
       "typeRoots": [
-        "node_modules/@types",
-        "node_modules/@types/mocha",
-        "node_modules/@types/chai",
-        "node_modules/@types/sinon",        
-        "src/lib/typings/nodejs.d"
+        "./node_modules/@types",
+        "./node_modules/@types/mocha",
+        "./node_modules/@types/chai",
+        "./node_modules/@types/sinon",        
+        "./src/lib/typings/nodejs.d"
       ]
     },
     "include": [

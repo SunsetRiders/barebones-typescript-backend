@@ -1,6 +1,5 @@
 import Server from "./server";
 import Config from "../environment/config";
-import Chalk from "chalk";
 
 class Api {
 
@@ -18,7 +17,7 @@ class Api {
     public start(): Server {
         // Listen
         return this.server.app.listen(global.app.config.get("server.port"), () => {
-            console.log(Chalk.blue(`[${global.app.config.get("server.name")}] - Listening at http://localhost:${global.app.config.get("server.port")}`));
+            console.log(`[${global.app.config.get("server.name")}] - Listening at http://localhost:${global.app.config.get("server.port")}`);
         });
     }
 

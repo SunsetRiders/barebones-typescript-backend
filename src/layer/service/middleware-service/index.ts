@@ -8,10 +8,6 @@ class MiddlewareService {
         return next();
     }
 
-    public static requestValidatorMw(req, res, next): any {
-        return next();
-    }
-
     public static responseValidatorMw(req, res, next): any {
          // Deal with errors
         if (res.locals.status === 404 && Array.isArray(res.locals.errors) && res.locals.errors.length === 0) {

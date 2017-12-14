@@ -1,0 +1,70 @@
+{
+  "name": "ts-backend",
+  "version": "1.0.0",
+  "private": false,
+  "description": "A typescript backend project",
+  "scripts": {
+    "watch-ts": "clear && tsc -w -p .",
+    "watch": "clear && nodemon dist/src/lib/core/api.js",
+    "test:tslint": "tslint --project tslint.json",
+    "test:unit": "nyc mocha --require ts-node/register test/unit/*.ts",
+    "test:security": "nsp check",
+    "test": "clear && npm run test:tslint && npm run test:unit && npm run test:security"
+  },
+  "nyc": {
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "exclude": [
+      "**/*.d.ts"
+    ],
+    "reporter": [
+      "text-summary"
+    ],
+    "all": true,
+    "sourceMap": true,
+    "instrument": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SunsetRiders/ts-backend.git"
+  },
+  "author": "Daitan Group",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SunsetRiders/ts-backend/issues"
+  },
+  "homepage": "https://github.com/SunsetRiders/ts-backend#readme",
+  "devDependencies": {
+    "@types/chai": "^4.0.4",
+    "@types/mocha": "^2.2.43",
+    "@types/node": "^8.0.32",
+    "@types/sinon": "^2.3.7",
+    "beepbeep": "^1.2.1",
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
+    "nodemon": "^1.12.1",
+    "nsp": "^2.8.1",
+    "nyc": "^11.2.1",
+    "sinon": "^4.0.1",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.7.0",
+    "tslint-no-unused-expression-chai": "0.0.3",
+    "typescript": "^2.6.2"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "chalk": "^2.3.0",
+    "cors": "^2.8.4",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "express-x-request-id": "github:SunsetRiders/express-x-request-id#v1.0.0",
+    "getconfig": "^3.1.0",
+    "getenv": "^0.7.0",
+    "logger": "github:SunsetRiders/logger#v1.0.0",
+    "path": "^0.12.7",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2"
+  }
+}

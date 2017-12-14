@@ -1,0 +1,35 @@
+{
+    "compilerOptions": {
+      "target": "es5",
+      "module": "commonjs",
+      "outDir": "dist",
+      "sourceMap": true,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "isolatedModules": true,      
+      "lib": [ 
+        "es6", 
+        "dom" 
+      ],
+      "types": [
+        "node",
+        "mocha",
+        "chai",
+        "sinon"
+      ],
+      "typeRoots": [
+        "node_modules/@types",
+        "node_modules/@types/mocha",
+        "node_modules/@types/chai",
+        "node_modules/@types/sinon",        
+        "src/lib/typings/nodejs.d"
+      ]
+    },
+    "include": [
+      "src/**/*",
+      "test/**/*"
+    ],
+    "exclude": [
+      "node_modules"
+    ]
+  }

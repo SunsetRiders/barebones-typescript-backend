@@ -1,5 +1,5 @@
 import Repository from "./repository";
-import { IUser } from "../interface/i-user";
+import { IUser } from "../interface/model/i-user";
 
 class UserRPT extends Repository {
 

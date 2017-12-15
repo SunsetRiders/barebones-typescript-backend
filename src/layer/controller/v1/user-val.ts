@@ -1,5 +1,4 @@
 import * as Joi from "joi";
-import { IUser } from "../../../../interface/i-user";
 
 class UserVal {
 
@@ -18,7 +17,7 @@ class UserVal {
                 errors: result.error.details
             });
         } else {
-            return next();            
+            return next();
         }
     }
 

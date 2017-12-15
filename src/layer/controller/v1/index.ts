@@ -1,8 +1,8 @@
 import * as Express from "express";
-import UserSRV from "../v1/user";
+import HealthCTR from "../v1/health";
 
 const router = new Express.Router();
 
-router.use("/user", UserSRV);
+router.use("/health", HealthCTR);
 
 export default router;

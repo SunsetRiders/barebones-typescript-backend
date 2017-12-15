@@ -1,4 +1,4 @@
-abstract class Business {
+abstract class Repository {
 
     constructor() {
         // Add some extention here
@@ -6,4 +6,4 @@ abstract class Business {
 
 }
 
-export default Business;
+export default Repository;

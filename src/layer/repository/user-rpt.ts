@@ -1,7 +1,7 @@
-import Business from "./business";
+import Repository from "./repository";
 import { IUser } from "../interface/i-user";
 
-class UserBUS extends Business {
+class UserRPT extends Repository {
 
     constructor() {
        super();
@@ -17,4 +17,4 @@ class UserBUS extends Business {
 
 }
 
-export default UserBUS;
+export default UserRPT;

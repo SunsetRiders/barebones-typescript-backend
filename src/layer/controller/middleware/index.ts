@@ -1,4 +1,4 @@
-class MiddlewareService {
+class MiddlewareController {
 
     public static initialMiddleware(req, res, next): any {
         res.locals.status = 404;
@@ -8,7 +8,7 @@ class MiddlewareService {
         return next();
     }
 
-    public static responseValidatorMw(req, res, next): any {
+    public static responseParser(req, res, next): any {
          // Deal with errors
         if (res.locals.status === 404 && Array.isArray(res.locals.errors) && res.locals.errors.length === 0) {
             res.locals.errors.push(new Error("Not Found"));
@@ -27,7 +27,7 @@ class MiddlewareService {
         return next();
     }
 
-    public static sendResponseMw(req, res, next): any {
+    public static sendResponse(req, res, next): any {
         const result = {
             payload: {},
             metadata: {},
@@ -49,4 +49,4 @@ class MiddlewareService {
 
 }
 
-export default MiddlewareService;
+export default MiddlewareController;

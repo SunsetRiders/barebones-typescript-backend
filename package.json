@@ -4,6 +4,7 @@
   "private": false,
   "description": "A typescript backend project",
   "scripts": {
+    "build": "tsc -p .",
     "watch-ts": "clear && tsc -w -p .",
     "transpile": "tsc -p .",
     "start": "node -e 'const Api = require(\"./dist/lib/core/api.js\").default; const api = new Api(); try { api.start(); } catch (err) { api.stop(); throw err; }'",

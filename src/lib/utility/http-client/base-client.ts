@@ -27,20 +27,6 @@ class BaseClient {
   }
 
   /**
-   * Set default locals
-   * @param {Request} cReq Current request
-   * @param {Response} cRes Current response
-   * @param {Response} msRes Microservice response
-   */
-  public setDefaultLocals(cReq, cRes, msRes): void {
-    cRes.locals.status   = ((msRes && msRes.statusCode) ? msRes.statusCode : cRes.locals.status);
-    cRes.locals.payload  = ((msRes && msRes.body && msRes.body.payload) ? msRes.body.payload : cRes.locals.payload);
-    cRes.locals.metadata = ((msRes && msRes.body && msRes.body.metadata) ? msRes.body.metadata : cRes.locals.metadata);
-    cRes.locals.errors   = ((msRes && msRes.body && msRes.body.errors) ? msRes.body.errors : cRes.locals.errors);
-    cReq.logger.info({microServiceResponse: cRes.locals });
-  }
-
-  /**
    * Call the resource
    * @param {IHttpRequestObject} options Request
    * @return {Promise<any>} A promise object

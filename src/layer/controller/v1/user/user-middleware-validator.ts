@@ -1,15 +1,14 @@
+import UserModel from "../../../model/user/index";
 import * as Joi from "joi";
 
-class UserVal {
+class UserMiddlewareValidator {
 
     public static validateRequest(req, res, next) {
-        const schema = Joi.object().keys({
-            limit: Joi.number().integer().required()
-        });
+        const userModel = new UserModel();
 
-        const result = Joi.validate({
-            limit: req.query.limit
-        }, schema);
+        const result = userModel.validateRequest({
+            id: req.query.id
+        });
 
         if (result.error) {
             return res.status(400).json({
@@ -23,4 +22,4 @@ class UserVal {
 
 }
 
-export default UserVal;
+export default UserMiddlewareValidator;

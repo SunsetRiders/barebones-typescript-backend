@@ -11,6 +11,9 @@ describe(`GET ${uri}`, () => {
     }).then(response => {
       expect(response.statusCode).to.eq(404);
       done();
+    }).catch(err => {
+      done();
+      throw err;
     });
   });
 

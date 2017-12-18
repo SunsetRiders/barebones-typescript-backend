@@ -1,5 +1,5 @@
 import Repository from "./repository";
-import { IUser } from "../interface/model/i-user";
+import UserMDL from "../model/user";
 
 class UserRPT extends Repository {
 
@@ -7,11 +7,10 @@ class UserRPT extends Repository {
        super();
     }
 
-    public async getUser(): Promise<IUser> {
-        const user: IUser = {
-            id: 1,
-            name: "Leandro"
-        };
+    public async getUser(): Promise<UserMDL> {
+        const user = new UserMDL();
+        user.id = 1;
+        user.name = "Leandro";
         return user;
     }
 

@@ -1,24 +1,25 @@
 import HttpClientTest from "../../utility/http-client-test";
 import { expect } from "chai";
 
-const uri = "/api/v1/health";
+const uri: string = "/api/v1/health";
 
 describe(`GET ${uri}`, () => {
 
   context(`Test localhost server health`, () => {
-    it(`GET ${uri}`, (done) => {
+    it(`GET ${uri}`, done => {
       HttpClientTest.call({
-        uri,
-        method: "GET"
+        method: "GET",
+        uri
       }).then(response => {
-        expect(response.statusCode).to.eq(200);
+        expect(response.statusCode).to.be.equal(204);
         done();
       });
     });
+
   });
 
   context(`Test postgres microservice health`, () => {
-    it(`GET ${uri}/postgres`, (done) => {
+    it(`GET ${uri}/postgres`, done => {
       HttpClientTest.call({
         uri: `${uri}/postgres`,
         method: "GET"

@@ -21,8 +21,7 @@ class Config extends BaseEnvironment {
         const dirRoot = GetEnv.string("ROOT_DIR", "./");
         return {
             server: {
-                name: GetEnv.string("SERVER_NAME", "ui-provider"),
-                version: GetEnv.string("SERVER_VERSION", "1.0.0"),
+                name: GetEnv.string("SERVER_NAME", "vmtd-ui-provider"),
                 nodeEnv: GetEnv.string("NODE_ENV", "development"),
                 port: GetEnv.int("SERVER_PORT", 8000),
                 dirRoot

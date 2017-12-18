@@ -8,7 +8,7 @@ class HttpClientTest {
 
   public static async call(options: IHttpRequestObject): Promise<any> {
     return RequestPromise({
-      uri: this.baseUrl + options.uri,
+      uri: HttpClientTest.baseUrl + options.uri,
       method: ((options.method) ? options.method : "GET"),
       json: true,
       simple: false,

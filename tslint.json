@@ -15,7 +15,8 @@
         "no-unused-expression-chai": false,
         "max-line-length": false,
         "no-string-literal": false,
-        "member-ordering": false
+        "member-ordering": false,
+        "no-var-requires": false
     },
     "rulesDirectory": [
         "tslint-no-unused-expression-chai"

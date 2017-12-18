@@ -5,11 +5,12 @@
   "description": "A typescript backend project",
   "scripts": {
     "watch-ts": "clear && tsc -w -p .",
-    "start": "node -e 'const Api = require(\"./dist/lib/core/api.js\").default; new Api().start();'",
+    "transpile": "tsc -p .",
+    "start": "node -e 'const Api = require(\"./dist/lib/core/api.js\").default; const api = new Api(); try { api.start(); } catch (err) { api.stop(); throw err; }'",
     "watch": "clear && nodemon -- exec npm run start",
     "test:tslint": "tslint --project tslint.json",
-    "test:unit": "nyc mocha --require ts-node/register test/unit/index.ts",
-    "test:functional": "nyc mocha --require ts-node/register test/functional/index.ts",    
+    "test:unit": "nyc mocha --require ts-node/register test/unit/**/*.ts",
+    "test:functional": "nyc mocha --require ts-node/register test/functional/**/index.ts",
     "test:security": "nsp check",
     "test": "clear && npm run test:tslint && npm run test:unit && npm run test:functional && npm run test:security"
   },
@@ -22,6 +23,7 @@
       "**/*.d.ts"
     ],
     "reporter": [
+      "text",
       "text-summary"
     ],
     "all": true,

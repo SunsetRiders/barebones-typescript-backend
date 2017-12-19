@@ -43,6 +43,7 @@ class RouterMiddleware {
             return res.json(result);
         }
 
+        delete result.payload;
         result.errors = res.locals.errors;
         return res.json(result);
     }

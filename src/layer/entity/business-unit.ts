@@ -1,10 +1,10 @@
-import Integration from "./integartion";
+import Integration from "./integration";
 import Product from "./product";
 
 class BusinessUnit {
   public title: string;
   public description: string;
-  public order: int;
+  public order: number;
   public products: Product[] = [];
   public integration: Integration;
 }

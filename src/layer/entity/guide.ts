@@ -1,5 +1,5 @@
 class Guide {
-  public order: int;
+  public order: number;
   public text: string;
   public url: string;
 }

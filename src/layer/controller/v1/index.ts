@@ -1,10 +1,10 @@
 import * as Express from "express";
 import HealthCTR from "../v1/health";
-import UserCTR from "../v1/user";
+import ProductCTR from "../v1/products";
 
 const router = new Express.Router();
 
 router.use("/health", HealthCTR);
-router.use("/user", UserCTR);
+router.use("/products", ProductCTR);
 
 export default router;

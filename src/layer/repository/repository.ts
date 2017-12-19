@@ -1,7 +1,15 @@
+import { IRepositoryContext } from "./../interface/i-repository";
+
 abstract class Repository {
 
-    constructor() {
-        // Add some extention here
+    protected context: IRepositoryContext;
+
+   /**
+    * @constructor
+    * @param {IRepositoryContext} context Repository context
+    */
+    constructor(context: IRepositoryContext) {
+        this.context = context;
     }
 
 }

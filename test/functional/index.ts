@@ -19,7 +19,7 @@ process.on("exit", code => {
     console.log("\x1b[0m");
     process.exit(67); // Exit code 67 is for ELIFECYCLE
   } else {
-    console.log("\x1b[32m", "All tests have passed! =)");
+    console.log("\x1b[32m", "All functional tests have passed! =)");
     console.log("\x1b[0m");
   }
 });

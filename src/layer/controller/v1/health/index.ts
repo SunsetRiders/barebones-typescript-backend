@@ -10,7 +10,9 @@ router.get("/", async (req, res, next) => {
 });
 
 router.get("/postgres", async (req, res, next) => {
-    const postgresClientV2 = new PostgresClientV2(req, res);
+    const postgresClientV2 = new PostgresClientV2({
+        logger: req.logger
+    });
     const msResponse = await postgresClientV2.health();
     RouterMiddleware.setDefaultLocals(req, res, msResponse);
     return next();

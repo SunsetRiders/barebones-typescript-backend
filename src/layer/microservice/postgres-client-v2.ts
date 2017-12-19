@@ -1,4 +1,5 @@
 import BaseClient from "../../lib/utility/http-client/base-client";
+import { IHttpRequestContext } from "../../lib/utility/http-client/i-http";
 
 /**
  * Client class to provide access to the EUC Portal API V2
@@ -8,15 +9,14 @@ class PostgresClientV2 extends BaseClient {
 
   /**
    * @constructor
-   * @param {Object} req Request object
-   * @param {Object} res Response object
+   * @param {IHttpRequestContext} context Http request object
    */
-  constructor(req, res) {
-    super(req, res, {
-      port: global.app.config.get("microservice.postgres.port"),
-      host: global.app.config.get("microservice.postgres.host"),
-      version: "/api/v2"
-    });
+  constructor(context: IHttpRequestContext) {
+    super(context);
+    this.context.port = global.app.config.get("microservice.postgres.port");
+    this.context.host = global.app.config.get("microservice.postgres.host");
+    this.context.version = "/api/v2";
+    super.repopulateContext(this.context);
   }
 
   /**
@@ -45,6 +45,17 @@ class PostgresClientV2 extends BaseClient {
     });
   }
 
+  /**
+   * List products
+   * @return {Promise<any>} Returns a promise
+   */
+  public async listProducts(): Promise<any> {
+    return await this.call({
+      origin: "#listProducts",
+      method: "GET",
+      uri: "/products"
+    });
+  }
 }
 
 export default PostgresClientV2;

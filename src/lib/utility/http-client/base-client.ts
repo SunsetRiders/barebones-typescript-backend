@@ -1,29 +1,25 @@
 import HttpRequest from "./http-request";
-import { IHttpRequestObject, IBaseClientObject } from "./i-http";
+import { IHttpRequestObject, IHttpRequestContext } from "./i-http";
 
 class BaseClient {
 
-  public req: any;
-  public res: any;
-  public host: string;
-  public port: string;
-  public httpRequest: HttpRequest;
+  protected readonly context: IHttpRequestContext;
 
   /**
    * @constructor
-   * @param {Object} req Request object
-   * @param {Object} res Response object
-   * @param {IBaseClientObject} options Options object
+   * @param {IHttpRequestContext} context HTTP request context
    */
-  constructor(req, res, options: IBaseClientObject) {
-    this.req = req;
-    this.res = res;
-    this.port = options.port ? `:${options.port}` : "";
-    this.httpRequest = new HttpRequest(
-      this.req,
-      this.res,
-      `${options.host}${this.port}${options.version}`
-    );
+  constructor(context: IHttpRequestContext) {
+    this.context = context;
+  }
+
+  /**
+   * Repopulate context
+   * @param {IHttpRequestContext} context HTTP request context
+   */
+  protected repopulateContext(context: IHttpRequestContext): void {
+    this.context.port = context.port ? `:${context.port}` : "";
+    this.context.host = `${context.host}${context.port}${context.version}`;
   }
 
   /**
@@ -32,7 +28,7 @@ class BaseClient {
    * @return {Promise<any>} A promise object
    */
   public async call(options: IHttpRequestObject): Promise<any> {
-    return await this.httpRequest.call({
+    return await new HttpRequest(this.context).call({
       origin: options.origin,
       method: options.method,
       uri: options.uri,

@@ -10,7 +10,7 @@ import RouteV1 from "../../layer/controller/v1";
 
 class Server {
 
-  public readonly app: any;
+  public readonly app: Express.app;
 
   constructor() {
     this.app = Express();

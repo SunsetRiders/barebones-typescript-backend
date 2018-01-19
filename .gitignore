@@ -5,3 +5,6 @@ package-lock.json
 coverage/
 dist/
 log/
+.env
+.idea/
+npm-debug.log

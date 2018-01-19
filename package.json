@@ -1,16 +1,16 @@
 {
-  "name": "ts-backend",
+  "name": "barebones-typescript-backend",
   "version": "1.0.0",
   "private": false,
-  "description": "A typescript backend project",
+  "description": "VMware UI Provider project to compose information from other microservices.",
   "scripts": {
-    "watch-ts": "clear && tsc -w -p .",
-    "transpile": "tsc -p .",
+    "build": "tsc -pretty -p .",
+    "watch-ts": "clear && tsc -pretty -w -p .",
     "start": "node -e 'const Api = require(\"./dist/lib/core/api.js\").default; const api = new Api(); try { api.start(); } catch (err) { api.stop(); throw err; }'",
     "watch": "clear && nodemon -- exec npm run start",
-    "test:tslint": "tslint --project tslint.json",
+    "test:tslint": "tslint --project tsconfig.json",
     "test:unit": "nyc mocha --require ts-node/register test/unit/**/*.ts",
-    "test:functional": "nyc mocha --require ts-node/register test/functional/**/index.ts",
+    "test:functional": "nyc mocha --timeout 5000 --require ts-node/register test/functional/**/index.ts",
     "test:security": "nsp check",
     "test": "clear && npm run test:tslint && npm run test:unit && npm run test:functional && npm run test:security"
   },
@@ -23,7 +23,6 @@
       "**/*.d.ts"
     ],
     "reporter": [
-      "text",
       "text-summary"
     ],
     "all": true,
@@ -32,14 +31,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SunsetRiders/ts-backend.git"
+    "url": "git+https://github.com/SunsetRiders/barebones-typescript-backend.git"
   },
   "author": "Daitan Group",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/SunsetRiders/ts-backend/issues"
+    "url": "https://github.com/SunsetRiders/barebones-typescript-backend/issues"
   },
-  "homepage": "https://github.com/SunsetRiders/ts-backend#readme",
+  "homepage": "https://github.com/SunsetRiders/barebones-typescript-backend#readme",
   "devDependencies": {
     "@types/chai": "^4.0.4",
     "@types/mocha": "^2.2.43",
@@ -53,7 +52,7 @@
     "nyc": "^11.2.1",
     "sinon": "^4.0.1",
     "ts-node": "^3.3.0",
-    "tslint": "^5.7.0",
+    "tslint": "^5.9.1",
     "tslint-no-unused-expression-chai": "0.0.3",
     "typescript": "^2.6.2"
   },

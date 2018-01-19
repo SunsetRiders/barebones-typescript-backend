@@ -1,26 +1,20 @@
 import * as RequestPromise from "request-promise";
-import { IHttpRequestObject } from "./i-http";
+import { IHttpRequestObject, IHttpRequestContext } from "./i-http";
 
 /**
  * Class to to handle HTTP requests to any web service.
  */
 class HttpRequest {
 
-  public req: any;
-   public res: any;
-   public host: string;
-   private requestPromise: RequestPromise;
+   private readonly context: IHttpRequestContext;
+   private readonly requestPromise: RequestPromise;
 
   /**
    * @constructor
-   * @param {Object} req Request object
-   * @param {Object} res Response object
-   * @param {String} host Resource's host
+   * @param {IHttpRequestContext} context HTTP context
    */
-  constructor(req, res, host: string) {
-    this.req = req;
-    this.res = res;
-    this.host = host;
+  constructor(context: IHttpRequestContext) {
+    this.context = context;
     this.requestPromise = RequestPromise;
   }
 
@@ -31,7 +25,7 @@ class HttpRequest {
    */
   private defaultMetadata(opts: IHttpRequestObject): IHttpRequestObject {
     // X-Request-Id
-    opts.headers["X-Request-Id"] = this.req.xRequestId;
+    opts.headers["X-Request-Id"] = this.context.xRequestId;
     return opts;
   }
 
@@ -43,7 +37,7 @@ class HttpRequest {
   private mountOptions(options: IHttpRequestObject): IHttpRequestObject {
     // Default headers
     return this.defaultMetadata({
-      uri: this.host + options.uri,
+      uri: this.context.host + options.uri,
       method: ((options.method) ? options.method : "GET"),
       json: options.json,
       simple: options.simple,
@@ -61,12 +55,12 @@ class HttpRequest {
    */
   public async call(options: IHttpRequestObject): Promise<any> {
     if (!options.origin) {
-      this.req.logger.warn("Missing options.origin, please fix this before sending it to production");
+      this.context.logger.warn("Missing options.origin, please fix this before sending it to production");
     }
 
     // Mount the options to make the request
     const opts = this.mountOptions(options);
-    const request = Object.assign({origin: options.origin}, opts);
+    const request = Object.assign({ origin: options.origin }, opts);
 
     /**
      * We will use some Bluebird's features (.tap(), .tapCatch()),
@@ -76,13 +70,13 @@ class HttpRequest {
     return await this.requestPromise(opts)
       .promise()
       .tap(response => {
-        this.req.logger.info({
+        this.context.logger.info({
           request,
           response
         });
       })
       .tapCatch(error => {
-        this.req.logger.error({
+        this.context.logger.error({
           request,
           error
         });

@@ -8,12 +8,10 @@ class Api {
     private readonly logger: Logger;
 
     constructor() {
-
         // Set global config
         global.app = {
             config: Config
         };
-
         this.logger = Logger.newInstance(global.app.config.get("logs"));
         this.server = new Server();
     }

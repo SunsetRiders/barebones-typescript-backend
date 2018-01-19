@@ -7,7 +7,7 @@ class HttpClientTest {
   public static baseUrl: string = `http://localhost:${Config.get("server.port")}`;
 
   public static async call(options: IHttpRequestObject): Promise<any> {
-    return RequestPromise({
+    const parsedOptions = {
       uri: HttpClientTest.baseUrl + options.uri,
       method: ((options.method) ? options.method : "GET"),
       json: true,
@@ -16,7 +16,12 @@ class HttpClientTest {
       qs: ((options.qs) ? options.qs : {}),
       body: ((options.body) ? options.body : {}),
       headers: ((options.headers) ? options.headers : {})
-    });
+    };
+
+    if (options.debug) {
+      console.log(parsedOptions);
+    }
+    return RequestPromise(parsedOptions);
   }
 
 }

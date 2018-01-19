@@ -5,6 +5,17 @@ class RouterMiddleware {
         res.locals.payload = {};
         res.locals.metadata = {};
         res.locals.errors = [];
+
+        // Validate api key
+        if (req.get("api_key") !== global.app.config.get("server.apiKey")) {
+            return res.status(401).json({
+                metadata: res.locals.metadata,
+                errors: [{
+                    field: "api_key header",
+                    message: "Not a valid api key have been provided."
+                }]
+            });
+        }
         return next();
     }
 
@@ -35,14 +46,18 @@ class RouterMiddleware {
         };
 
         res.status(res.locals.status);
-
         req.logger.info(res.locals);
+
+        if (Object.keys(res.locals.metadata).length > 0) {
+            result.metadata = res.locals.metadata;
+        }
 
         if (res.locals.status < 400) {
             result.payload = res.locals.payload;
             return res.json(result);
         }
 
+        delete result.payload;
         result.errors = res.locals.errors;
         return res.json(result);
     }

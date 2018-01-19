@@ -8,10 +8,13 @@ export interface IHttpRequestObject {
   json?: boolean;
   simple?: boolean;
   resolveWithFullResponse?: boolean;
+  debug?: boolean;
 }
 
-export interface IBaseClientObject {
-  host: string;
-  port: string;
-  version: string;
+export interface IHttpRequestContext {
+  host?: string;
+  port?: string;
+  version?: string;
+  logger: any;
+  xRequestId?: string;
 }

@@ -2,9 +2,11 @@ import * as RequestPromise from "request-promise";
 import Config from "../../../src/lib/environment/config";
 import { IHttpRequestObject } from "../../../src/lib/utility/http-client/i-http";
 
+const config = Config.configFactory();
+
 class HttpClientTest {
 
-  public static baseUrl: string = `http://localhost:${Config.get("server.port")}`;
+  public static baseUrl: string = `http://localhost:${config.server.port}`;
 
   public static async call(options: IHttpRequestObject): Promise<any> {
     const parsedOptions = {

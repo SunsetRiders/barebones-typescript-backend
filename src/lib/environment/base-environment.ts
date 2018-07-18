@@ -7,19 +7,14 @@ class BaseEnvironment {
 
     constructor(options: any) {
        this.options = options;
-       this.setProcessEnv();
     }
 
-   protected get(key: string, payload: object): any {
-        return key.split(".")
-                  .reduce((o, i) => o[i], payload);
-    }
-
-    private setProcessEnv(): void {
+    public setProcessEnv(): this {
         process.env.ROOT_DIR = process.env.PWD;
         DotEnv.config({
             path: Path.join(process.env.ROOT_DIR, this.options.filename)
         });
+        return this;
      }
  }
 

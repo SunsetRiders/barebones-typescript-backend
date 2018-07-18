@@ -4,6 +4,8 @@ export interface IHttpRequestObject {
   method: string;
   qs?: object;
   body?: object;
+  form?: object;
+  formData?: object;
   headers?: object;
   json?: boolean;
   simple?: boolean;
@@ -13,7 +15,7 @@ export interface IHttpRequestObject {
 
 export interface IHttpRequestContext {
   host?: string;
-  port?: string;
+  port?: number;
   version?: string;
   logger: any;
   xRequestId?: string;

@@ -1,4 +1,4 @@
-import BaseClient from "../../lib/utility/http-client/base-client";
+import { BaseClient } from "../../lib/utility/http-client/base-client";
 import { IHttpRequestContext } from "../../lib/utility/http-client/i-http";
 
 /**

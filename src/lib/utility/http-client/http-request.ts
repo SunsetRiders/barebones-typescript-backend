@@ -25,7 +25,9 @@ class HttpRequest {
    */
   private defaultMetadata(opts: IHttpRequestObject): IHttpRequestObject {
     // X-Request-Id
-    opts.headers["X-Request-Id"] = this.context.xRequestId;
+    if (this.context.logger && this.context.logger.metadata && this.context.logger.metadata.xRequestId) {
+      opts.headers["X-Request-Id"] = this.context.logger.metadata.xRequestId;
+    }
     return opts;
   }
 
@@ -36,16 +38,43 @@ class HttpRequest {
    */
   private mountOptions(options: IHttpRequestObject): IHttpRequestObject {
     // Default headers
-    return this.defaultMetadata({
+    const obj =  this.defaultMetadata({
       uri: this.context.host + options.uri,
       method: ((options.method) ? options.method : "GET"),
       json: options.json,
       simple: options.simple,
       resolveWithFullResponse: options.resolveWithFullResponse,
-      qs: ((options.qs) ? options.qs : {}),
-      body: ((options.body) ? options.body : {}),
-      headers: ((options.headers) ? options.headers : {})
+      qs: ((options.qs) ? options.qs : undefined),
+      body: ((options.body) ? options.body : undefined),
+      form: ((options.form) ? options.form : undefined),
+      formData: ((options.formData) ? options.formData : undefined),
+      headers: ((options.headers) ? options.headers : {}),
+      debug: ((typeof options.debug === "boolean") ? options.debug : false),
     });
+
+    // Delete unused request object keys
+    if (obj.qs === undefined) {
+      delete obj.qs;
+    }
+
+    if (obj.form === undefined) {
+      delete obj.form;
+    }
+
+    if (obj.body === undefined) {
+      delete obj.body;
+    }
+
+    if (obj.formData === undefined) {
+      delete obj.formData;
+    }
+
+    if (obj.debug) {
+      console.log(obj);
+      delete obj.debug;
+    }
+
+    return obj;
   }
 
   /**

@@ -1,9 +1,5 @@
 declare module NodeJS  {
-    interface Global {
-        app: {
-            config: any
-        }
-    }    
+    interface Global {}    
 }
 
 declare function escape(s:string): string;

@@ -1,4 +1,4 @@
-version: '1'
+version: '3'
 services:
   api:
     build:
@@ -9,12 +9,8 @@ services:
       - 3000
     env_file:
       - .env
-  test:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    command: ["npm", "test"]
-    env_file:
-      - .env.test
-    environment:
-      - NODE_ENV=test
+  redis:
+    image: redis:4.0.9
+    command: redis-server --requirepass VMware123!
+    ports:
+      - "6379:6379"
